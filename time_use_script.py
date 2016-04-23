@@ -88,7 +88,7 @@ for week_start in np.arange(xmin+3,xmax-1, 7):
 #change x axis labels
 ax.set_xticklabels([x.strftime('%a\n%d\n%h\n%Y') for x in time_use.index])
 ax.set_ylabel('Hours')
-ax.set_ylabel('Date')
+ax.set_xlabel('Date')
 
 #ax.grid(True)
 
