@@ -101,7 +101,7 @@ time_use['week'] = time_use.index.week
 time_use['month'] = time_use.index.month
 time_use['weekday'] = time_use.index.weekday
 
-ax = (time_use/60.0).groupby(time_use.week).sum()[['work','bizdev','misc','health','inthob','growth']].plot(figsize = (20,8),ylim= [-5,100], yticks = range(0,105,5), fontsize = 15,kind='bar', stacked = True)
+ax = (time_use/60.0).groupby(time_use.week).sum()[['work','bizdev','misc','health','inthob','growth']].plot(figsize = (20,8),ylim= [-5,100], yticks = range(0,105,5), fontsize = 15,kind='bar', stacked = True, rot=0)
 ax.set_ylabel('Hours')
 ax.set_xlabel('Week Number')
 
