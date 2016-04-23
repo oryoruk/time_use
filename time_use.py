@@ -247,6 +247,3 @@ for i in range(7):
 # * bizdev
 # 
 # I don't care about 'misc'
-
-
-
