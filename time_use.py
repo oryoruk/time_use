@@ -16,7 +16,9 @@ pd.options.display.mpl_style = 'default'
 
 # <codecell>
 
-running_record = pd.read_csv('record.csv',skiprows=1,usecols=[1,2,3,4],index_col=0, parse_dates=True)
+running_record = pd.read_csv('record.csv',index_col=0, parse_dates=True)
+#running_record = pd.read_csv('record.csv',skiprows=1,usecols=[1,2,3,4],index_col=0, parse_dates=True)
+
 running_record.tail(10)
 
 # <headingcell level=2>
@@ -95,6 +97,14 @@ ax = (time_use/60.0).plot(figsize = (45,8), fontsize = 15, stacked = True, ylim=
 
 # <codecell>
 
+time_use.index
+
+# <codecell>
+
+[x.strftime('%a\n%d\n%h\n%Y') for x in time_use.index];
+
+# <codecell>
+
 #plt.figure()
 #ax = fig.add_subplot(111)
 
@@ -103,7 +113,7 @@ ax = (time_use/60.0).plot(figsize = (45,8), fontsize = 15, stacked = True, ylim=
 #plt.xlim([0,100])
 
 #a = datetime64('2016-04-17')
-ax = (time_use/60.0).plot(figsize = (45,8), fontsize = 15,ylim= [-1,16], yticks = range(17),kind  = 'bar',stacked=True)
+ax = (time_use/60.0).plot(figsize = (45,8), fontsize = 15,ylim= [-1,16], yticks = range(17),kind  = 'bar',stacked=True, rot=0)#, grid=True)
 ymin, ymax = ax.get_ylim()
 xmin, xmax = ax.get_xlim()
 
@@ -119,11 +129,17 @@ for weekend_start in np.arange(xmin+1,xmax-1, 7):
 for week_start in np.arange(xmin+3,xmax-1, 7):
     ax.axvspan(xmin= week_start,xmax= week_start+5, ymin=ymin, ymax= ymax, color='#0066cc',alpha = 0.2, zorder = -1 )
 
+ax.set_xticklabels([x.strftime('%a\n%d\n%h\n%Y') for x in time_use.index])
+#ax.set_xticklabels([], minor=True)
+
+#ax.set_xticklabels([], major=True)
+#ax.set_xticklabels()
+#ax.grid(True)
 
 #current day is highlighted in red:
 ax.axvspan(xmin= xmax-1,xmax= xmax, ymin=ymin, ymax= ymax, color='r',alpha = 0.2, zorder = -1 )
 
-plt.savefig('time_use.png', bbox_inches='tight', dpi=300)
+#plt.savefig('time_use.png', bbox_inches='tight', dpi=300)
 
 # <codecell>
 
@@ -247,3 +263,4 @@ for i in range(7):
 # * bizdev
 # 
 # I don't care about 'misc'
+
