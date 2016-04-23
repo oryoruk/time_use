@@ -275,3 +275,23 @@ for i in range(7):
 # <codecell>
 
 
+# <codecell>
+
+
+# <codecell>
+
+
+# <codecell>
+
+
+# <codecell>
+
+print 'ali ata bak'
+
+# <codecell>
+
+print 'ali ata bak'
+
+# <codecell>
+
+
