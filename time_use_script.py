@@ -14,7 +14,8 @@ pd.options.display.mpl_style = 'default'
 
 # <codecell>
 
-running_record = pd.read_csv('record.csv',skiprows=1,usecols=[1,2,3,4],index_col=0, parse_dates=True)
+#running_record = pd.read_csv('record.csv',skiprows=1,usecols=[1,2,3,4],index_col=0, parse_dates=True)
+running_record = pd.read_csv('record.csv',index_col=0, parse_dates=True)
 
 # <headingcell level=2>
 
