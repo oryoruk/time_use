@@ -66,7 +66,6 @@ del inthob
 time_use.index.name = 'date'
 
 
-
 # Plots
 #plt.figure()
 #ax = fig.add_subplot(111)
