@@ -87,7 +87,8 @@ for week_start in np.arange(xmin+3,xmax-1, 7):
 
 #change x axis labels
 ax.set_xticklabels([x.strftime('%a\n%d\n%h\n%Y') for x in time_use.index])
-
+ax.set_ylabel('Hours')
+ax.set_ylabel('Date')
 
 #ax.grid(True)
 
@@ -100,5 +101,8 @@ time_use['week'] = time_use.index.week
 time_use['month'] = time_use.index.month
 time_use['weekday'] = time_use.index.weekday
 
-(time_use/60.0).groupby(time_use.week).sum()[['work','bizdev','misc','health','inthob','growth']].plot(figsize = (20,8), fontsize = 15,kind='bar', stacked = True)
+ax = (time_use/60.0).groupby(time_use.week).sum()[['work','bizdev','misc','health','inthob','growth']].plot(figsize = (20,8),ylim= [-5,100], yticks = range(0,105,5), fontsize = 15,kind='bar', stacked = True)
+ax.set_ylabel('Hours')
+ax.set_xlabel('Week Number')
+
 plt.savefig('weekly.png', bbox_inches='tight', dpi=300)
