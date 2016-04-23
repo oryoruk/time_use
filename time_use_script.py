@@ -68,17 +68,11 @@ time_use.index.name = 'date'
 
 
 # Plots
-#plt.figure()
-#ax = fig.add_subplot(111)
 
-#plt.axvspan(2,5,facecolor = '0.5', alpha =0.5)
-
-#plt.xlim([0,100])
-
-#a = datetime64('2016-04-17')
-ax = (time_use/60.0).plot(figsize = (45,8), fontsize = 15,ylim= [-1,16], yticks = range(17),kind  = 'bar',stacked=True)
+ax = (time_use/60.0).plot(figsize = (45,8), fontsize = 15,ylim= [-1,16], yticks = range(17),kind  = 'bar',stacked=True, rot=0)#, grid=True)
 ymin, ymax = ax.get_ylim()
 xmin, xmax = ax.get_xlim()
+
 
 #record starts on a friday:
 ax.axvspan(xmin= xmin,xmax= xmin+1, ymin=ymin, ymax= ymax, color='#0066cc',alpha = 0.2, zorder = -1 )
@@ -91,6 +85,11 @@ for weekend_start in np.arange(xmin+1,xmax-1, 7):
 for week_start in np.arange(xmin+3,xmax-1, 7):
     ax.axvspan(xmin= week_start,xmax= week_start+5, ymin=ymin, ymax= ymax, color='#0066cc',alpha = 0.2, zorder = -1 )
 
+#change x axis labels
+ax.set_xticklabels([x.strftime('%a\n%d\n%h\n%Y') for x in time_use.index])
+
+
+#ax.grid(True)
 
 #current day is highlighted in red:
 ax.axvspan(xmin= xmax-1,xmax= xmax, ymin=ymin, ymax= ymax, color='r',alpha = 0.2, zorder = -1 )
