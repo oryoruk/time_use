@@ -73,7 +73,6 @@ ax = (time_use/60.0).plot(figsize = (45,8), fontsize = 15,ylim= [-1,16], yticks 
 ymin, ymax = ax.get_ylim()
 xmin, xmax = ax.get_xlim()
 
-
 #record starts on a friday:
 ax.axvspan(xmin= xmin,xmax= xmin+1, ymin=ymin, ymax= ymax, color='#0066cc',alpha = 0.2, zorder = -1 )
 
@@ -91,7 +90,11 @@ for week_start in np.arange(xmin+3,xmax-1, 7):
     else:
         ax.axvspan(xmin= week_start,xmax= xmax-1, ymin=ymin, ymax= ymax, color='#0066cc',alpha = 0.2, zorder = -1 )
 
-ax.axhline(6,  color='r',alpha = 0.5, zorder = +1 )
+#if weekend:
+if time_use.index[-1].weekday() in [5, 6]:
+    ax.axhline(5,  color='g', alpha=0.5, zorder=+1)
+else:
+    ax.axhline(7,  color='#0066cc', alpha=0.5, zorder=+1)
 
 #change x axis labels
 ax.set_xticklabels([x.strftime('%a\n%d\n%h\n%Y') for x in time_use.index])
@@ -113,7 +116,7 @@ ax = (time_use/60.0).groupby(time_use.week).sum()[['work','bizdev','misc','healt
 ymin, ymax = ax.get_ylim()
 xmin, xmax = ax.get_xlim()
 ax.axvspan(xmin= xmax-1,xmax= xmax, ymin=ymin, ymax= ymax, color='r',alpha = 0.2, zorder = -1 )
-ax.axhline(42,  color='r',alpha = 0.5, zorder = +1 )
+ax.axhline(45,  color='r',alpha = 0.5, zorder = +1 )
 ax.set_ylabel('Hours')
 ax.set_xlabel('Week Number')
 
