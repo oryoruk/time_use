@@ -79,11 +79,19 @@ ax.axvspan(xmin= xmin,xmax= xmin+1, ymin=ymin, ymax= ymax, color='#0066cc',alpha
 
 #highlight weekends in green:
 for weekend_start in np.arange(xmin+1,xmax-1, 7):
-    ax.axvspan(xmin= weekend_start,xmax= weekend_start+2, ymin=ymin, ymax= ymax, color='g',alpha = 0.2, zorder = -1 )
+    if(weekend_start+2)< (xmax-1):
+        ax.axvspan(xmin= weekend_start,xmax= weekend_start+2, ymin=ymin, ymax= ymax, color='g',alpha = 0.2, zorder = -1 )
+    else:
+        ax.axvspan(xmin= weekend_start,xmax=xmax-1, ymin=ymin, ymax= ymax, color='g',alpha = 0.2, zorder = -1 )
 
 #highlight weekdays in blue:
 for week_start in np.arange(xmin+3,xmax-1, 7):
-    ax.axvspan(xmin= week_start,xmax= week_start+5, ymin=ymin, ymax= ymax, color='#0066cc',alpha = 0.2, zorder = -1 )
+    if(week_start+5)< (xmax-1):
+        ax.axvspan(xmin= week_start,xmax= week_start+5, ymin=ymin, ymax= ymax, color='#0066cc',alpha = 0.2, zorder = -1 )
+    else:
+        ax.axvspan(xmin= week_start,xmax= xmax-1, ymin=ymin, ymax= ymax, color='#0066cc',alpha = 0.2, zorder = -1 )
+
+ax.axhline(6,  color='r',alpha = 0.5, zorder = +1 )
 
 #change x axis labels
 ax.set_xticklabels([x.strftime('%a\n%d\n%h\n%Y') for x in time_use.index])
@@ -102,6 +110,7 @@ time_use['month'] = time_use.index.month
 time_use['weekday'] = time_use.index.weekday
 
 ax = (time_use/60.0).groupby(time_use.week).sum()[['work','bizdev','misc','health','inthob','growth']].plot(figsize = (20,8),ylim= [-5,100], yticks = range(0,105,5), fontsize = 15,kind='bar', stacked = True, rot=0)
+ax.axhline(42,  color='r',alpha = 0.5, zorder = +1 )
 ax.set_ylabel('Hours')
 ax.set_xlabel('Week Number')
 
